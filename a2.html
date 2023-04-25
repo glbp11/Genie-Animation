@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>CPSC 426 Assignment 2 Jan 2022</title>
+    <style>
+      body { margin: 0; } canvas {width: 100%;
+      height: 100% }
+    </style>
+  </head>
+  <body>
+    <div id="canvas"></div>
+
+<!---- Custom shader definitions;  not used in the default template code ---->
+
+<script id="customVertexShader" type="x-shader/x-vertex">
+varying vec3 varyingNormal;
+void main()
+{
+        varyingNormal = normal;
+	vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+	gl_Position = projectionMatrix * mvPosition;
+}
+</script>
+
+<script id="customFragmentShader" type="x-shader/x-fragment">
+uniform sampler2D floorTexture;
+varying vec3 varyingNormal;
+void main( void ) {
+
+    // Set final rendered color according to the surface normal
+  vec3 N = normalize(varyingNormal);
+// vec3 N = vec3(1.0,0.0,0.0);
+  gl_FragColor = vec4(N.x,N.y,N.z, 1.0);
+}
+</script>
+
+
+
+  <!--  threejs and related libraries --> 
+
+<script src="js/three.min.js"></script> 
+<script src="js/OBJLoader.js"></script>
+<script src="js/SourceLoader.js"></script>
+<script src="js/OrbitControls.js"></script>
+<script src="js/KeyboardState.js"></script> <!-- By Jerome Etienne: http://jetienne.com/ -->
+
+  <!--  Assignment template code --> 
+
+<script src="motion.js"></script>
+<script src="scene.js"></script>
+<script src="warp.js"></script>
+<script src="luxo.js"></script>
+<script src="pencil.js"></script>
+<script src="genie.js"></script>
+<script src="spline.js"></script>
+<script src="kfs.js"></script>
+
+</body>
+</html>
+
